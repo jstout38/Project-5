@@ -13,6 +13,11 @@
 				<input type="submit" text="Filter"/>
 			</form>
 		</header>
+		<div id='cssmenu'>
+			<ul data-bind="foreach: myObservableLocations">
+				<li><a href="#"><span data-bind="text: title"></span></a></li>
+			</ul>
+		</div>
 		<div id="map"></div>
 	</body>
 	<script async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCHd_wkaJ3BsSb6J1R0iGBClGAhN7KdxB8&callback=initMap'></script>
