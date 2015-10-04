@@ -2,6 +2,7 @@
 
 var map
 
+//Model
 var myLocations = {
 	locationInfo : [
 		{
@@ -27,42 +28,11 @@ var myLocations = {
 	]
 }
 
+//ViewModel
 var myViewModel = {
 	myObservableLocations : ko.observableArray(),
 	filter : ko.observable(""),
 	myFilteredLocations : ko.observableArray()
-}
-
-function initMap() {
-  // Create a map object and specify the DOM element for display.
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 35.262664, lng: -77.581635},
-    //scrollwheel: false,
-    zoom: 14
-  });
-
-  initMarkers(map);
-
-}
-
-function setMarkers(locations, map) {
-	console.log(locations);
-	for (var i = 0; i < locations.length; i++) {
-		locations[i].setMap(map);
-	}
-}
-
-function initMarkers(map) {
-	for (var i = 0; i < myLocations.locationInfo.length; i++) {
-		var marker = new google.maps.Marker({
-    		position: myLocations.locationInfo[i].location,
-   			map: map,
-    		title: myLocations.locationInfo[i].name
- 		});
- 		myViewModel.myObservableLocations.push(marker);
- 		myViewModel.myFilteredLocations.push(marker);
-	}
-	setMarkers(myViewModel.myObservableLocations(), map);
 }
 
 myViewModel.filteredItems = ko.computed(function() {
@@ -84,6 +54,49 @@ myViewModel.updateList = function() {
 	}
 	clearMarkers();
 	setMarkers(myViewModel.myFilteredLocations(), map);
+}
+
+function initMap() {
+  // Create a map object and specify the DOM element for display.
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 35.262664, lng: -77.581635},
+    //scrollwheel: false,
+    zoom: 14
+  });
+
+  initMarkers(map);
+
+}
+
+//View
+
+function setMarkers(locations, map) {
+	for (var i = 0; i < locations.length; i++) {
+		locations[i].setMap(map);
+	}
+}
+
+function initMarkers(map) {
+	for (var i = 0; i < myLocations.locationInfo.length; i++) {
+		var marker = new google.maps.Marker({
+    		position: myLocations.locationInfo[i].location,
+   			map: map,
+   			animation: google.maps.Animation.DROP,
+    		title: myLocations.locationInfo[i].name
+ 		});
+ 		marker.addListener('click', toggleBounce);
+ 		myViewModel.myObservableLocations.push(marker);
+ 		myViewModel.myFilteredLocations.push(marker);
+	}
+	setMarkers(myViewModel.myObservableLocations(), map);
+}
+
+function toggleBounce() {
+	if (this.getAnimation() !== null) {
+		this.getAnimation(null);
+	} else {
+		this.setAnimation(google.maps.Animation.BOUNCE);
+	}
 }
 
 function clearMarkers() {
