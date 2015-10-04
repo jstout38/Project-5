@@ -29,7 +29,8 @@ var myLocations = {
 
 var myViewModel = {
 	myObservableLocations : ko.observableArray(),
-	filter : ko.observable("")
+	filter : ko.observable(""),
+	myFilteredLocations : ko.observableArray()
 }
 
 function initMap() {
@@ -59,6 +60,7 @@ function initMarkers(map) {
     		title: myLocations.locationInfo[i].name
  		});
  		myViewModel.myObservableLocations.push(marker);
+ 		myViewModel.myFilteredLocations.push(marker);
 	}
 	setMarkers(myViewModel.myObservableLocations(), map);
 }
@@ -76,8 +78,12 @@ myViewModel.filteredItems = ko.computed(function() {
 
 myViewModel.updateList = function() {
 	var filteredList = myViewModel.filteredItems();
+	myViewModel.myFilteredLocations.removeAll();
+	for (var i = 0; i < filteredList.length; i++) {
+		myViewModel.myFilteredLocations.push(filteredList[i]);
+	}
 	clearMarkers();
-	setMarkers(filteredList, map);
+	setMarkers(myViewModel.myFilteredLocations(), map);
 }
 
 function clearMarkers() {
