@@ -8,9 +8,9 @@
 	</head>
 	<body>
 		<header>
-			<form data-bind="submit: updateList">
-				<input data-bind="value : filter"/>
-				<input type="submit" text="Filter"/>
+			<form id="search-form" data-bind="submit: updateList">
+				<input type="text" data-bind="value : filter"></input>
+				<input type="submit" text="Filter"></input>
 			</form>
 		</header>
 		<div id='cssmenu'>

@@ -5,7 +5,7 @@ var map
 var myLocations = {
 	locationInfo : [
 		{
-			"name" : "Library",
+			"name" : "Kinston-Lenoir County Public Library",
 			"location" : { lat: 35.266334, lng : -77.581517 }
 		},
 		{
