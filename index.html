@@ -7,6 +7,12 @@
 		<link href="css/styles.css" rel="stylesheet">
 	</head>
 	<body>
+		<header>
+			<form data-bind="submit: updateList">
+				<input data-bind="value : filter"/>
+				<input type="submit" text="Filter"/>
+			</form>
+		</header>
 		<div id="map"></div>
 	</body>
 	<script async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyCHd_wkaJ3BsSb6J1R0iGBClGAhN7KdxB8&callback=initMap'></script>

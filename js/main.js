@@ -1,3 +1,7 @@
+//TODO : refactor marker code to use object
+
+var map
+
 var myLocations = {
 	locationInfo : [
 		{
@@ -23,22 +27,27 @@ var myLocations = {
 	]
 }
 
-var myObservableLocations = ko.observableArray();
+var myViewModel = {
+	myObservableLocations : ko.observableArray(),
+	filter : ko.observable("")
+}
 
 function initMap() {
   // Create a map object and specify the DOM element for display.
-  var map = new google.maps.Map(document.getElementById('map'), {
+  map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 35.262664, lng: -77.581635},
     //scrollwheel: false,
     zoom: 14
   });
 
   initMarkers(map);
+
 }
 
-function setMarkers(map) {
-	for (var i = 0; i < myObservableLocations().length; i++) {
-		myObservableLocations()[i].setMap(map);
+function setMarkers(locations, map) {
+	console.log(locations);
+	for (var i = 0; i < locations.length; i++) {
+		locations[i].setMap(map);
 	}
 }
 
@@ -49,7 +58,34 @@ function initMarkers(map) {
    			map: map,
     		title: myLocations.locationInfo[i].name
  		});
- 		myObservableLocations.push(marker);
+ 		myViewModel.myObservableLocations.push(marker);
 	}
-	setMarkers(map);
+	setMarkers(myViewModel.myObservableLocations(), map);
 }
+
+myViewModel.filteredItems = ko.computed(function() {
+	var filter = this.filter().toLowerCase();
+	if (!filter) {
+		return this.myObservableLocations();
+	} else {
+		return ko.utils.arrayFilter(this.myObservableLocations(), function(item) {
+			return item.title.toLowerCase().indexOf(filter) !== -1;
+		});
+	}
+}, myViewModel);
+
+myViewModel.updateList = function() {
+	var filteredList = myViewModel.filteredItems();
+	clearMarkers();
+	setMarkers(filteredList, map);
+}
+
+function clearMarkers() {
+  ko.utils.arrayForEach(myViewModel.myObservableLocations(), function(marker) {
+  	marker.setMap(null);
+  })
+
+}
+
+ko.applyBindings(myViewModel);
+
