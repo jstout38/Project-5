@@ -32,7 +32,8 @@ var myLocations = {
 var myViewModel = {
 	myObservableLocations : ko.observableArray(),
 	filter : ko.observable(""),
-	myFilteredLocations : ko.observableArray()
+	myFilteredLocations : ko.observableArray(),
+	currentMarker : []
 }
 
 myViewModel.filteredItems = ko.computed(function() {
@@ -84,6 +85,7 @@ function initMarkers(map) {
    			animation: google.maps.Animation.DROP,
     		title: myLocations.locationInfo[i].name
  		});
+ 		myViewModel.currentMarker = marker;
  		marker.addListener('click', toggleBounce);
  		myViewModel.myObservableLocations.push(marker);
  		myViewModel.myFilteredLocations.push(marker);
@@ -92,11 +94,9 @@ function initMarkers(map) {
 }
 
 function toggleBounce() {
-	if (this.getAnimation() !== null) {
-		this.getAnimation(null);
-	} else {
-		this.setAnimation(google.maps.Animation.BOUNCE);
-	}
+	myViewModel.currentMarker.setAnimation(null);
+	myViewModel.currentMarker = this;
+	this.setAnimation(google.maps.Animation.BOUNCE);
 }
 
 function clearMarkers() {
