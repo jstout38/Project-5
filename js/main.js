@@ -96,7 +96,7 @@ function initMarkers(map) {
 function toggleBounce() {
 	myViewModel.currentMarker.setAnimation(null);
 	myViewModel.currentMarker = this;
-	this.setAnimation(google.maps.Animation.BOUNCE);
+	myViewModel.currentMarker.setAnimation(google.maps.Animation.BOUNCE);
 }
 
 function clearMarkers() {

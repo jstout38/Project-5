@@ -15,7 +15,7 @@
 		</header>
 		<div id='cssmenu'>
 			<ul data-bind="foreach: myFilteredLocations">
-				<li><a href="#"><span data-bind="text: title"></span></a></li>
+				<li><a href="#"><span data-bind="text: title, click: toggleBounce"></span></a></li>
 			</ul>
 		</div>
 		<div id="map"></div>
