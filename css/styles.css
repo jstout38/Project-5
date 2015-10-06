@@ -1,12 +1,24 @@
 html, body {
 	height: 100%;
-	margin: 0;
-	padding: 0;
+	margin: 0px;
+	padding: 0px;
 	background: #333;
 }
 
 #map {
 	height: 100%;
+}
+
+#open {
+  color: green;
+}
+
+#closed {
+  color: red;
+}
+
+#snippet {
+  font-style: italic;
 }
 
 #cssmenu {
@@ -34,7 +46,7 @@ html, body {
   font-weight: normal;
 }
 #cssmenu a:hover {
-  background: #2580a2 url("images/hover.gif") left center no-repeat;
+  background: #2580a2 url("../images/hover.gif") left center no-repeat;
   color: #fff;
   padding-bottom: 8px;
 }
