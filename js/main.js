@@ -3,11 +3,11 @@
 //These variables need to be global
 var map;
 var infowindow;
+var bounds;
 
 //Static variables for the starting position of the map
 var STARTINGLAT = 35.258004;
 var STARTINGLNG = -77.581635;
-var STARTINGZOOM = 14;
 
 /////////////
 //	MODEL  //
@@ -189,8 +189,8 @@ function initMap() {
 	// Create a map object and specify the DOM element for display.
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: STARTINGLAT, lng: STARTINGLNG},
-		zoom: STARTINGZOOM
 	});
+	bounds = new google.maps.LatLngBounds();
 	initMarkers(map);
 }
 
@@ -216,8 +216,10 @@ function initMarkers(map) {
 		marker.addListener('click', clickActions);
 		myViewModel.myObservableLocations.push(marker);
 		myViewModel.myFilteredLocations.push(marker);
+		bounds.extend(marker.getPosition());
 	}
 	setMarkers(myViewModel.myObservableLocations(), map);
+	map.fitBounds(bounds);
 }
 
 //Function that is called upon clicking a marker or an item in the list view. Animates the marker and calls the info window function
