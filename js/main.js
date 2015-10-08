@@ -5,7 +5,7 @@ var map;
 var infowindow;
 var bounds;
 
-//Static variables for the starting position of the map
+//Static variables for the starting position of the map (Set as a default, the map will zoom to fit markers when they are initialized)
 var STARTINGLAT = 35.258004;
 var STARTINGLNG = -77.581635;
 
@@ -187,8 +187,13 @@ myViewModel.updateList = function() {
 //Initializes the map
 function initMap() {
 	// Create a map object and specify the DOM element for display.
+	var showControls = true;
+	if ($( window ).height() < 800) {
+		showControls = false;
+	}
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: STARTINGLAT, lng: STARTINGLNG},
+		mapTypeControl: showControls
 	});
 	bounds = new google.maps.LatLngBounds();
 	initMarkers(map);
@@ -239,8 +244,12 @@ function setInfoWindow() {
 	if (infowindow) {
 		infowindow.close();
 	}
+	var height = $( window ).height() / 4;
+	var width = $( window ).width() / 1.5;
 	infowindow = new google.maps.InfoWindow({
-		content: '<div id="info"><img src="images/loading.png"></div>'
+		content: '<div id="info"><img src="images/loading.png"></div>',
+		maxHeight: height,
+		maxWidth: width
 	});
 	map.panTo(myViewModel.currentMarker.getPosition())
 	infowindow.open(map,myViewModel.currentMarker);

@@ -4,30 +4,46 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Justin's Interactive Map</title>
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
 		<link href="css/styles.css" rel="stylesheet">
+
 	</head>
 	<body>
-		<header>
-			<!-- Creates the form for the filter. Binds the submit button to update the list with the value in the text box. -->
+		<!-- <header>
+			<!-- Creates the form for the filter. Binds the submit button to update the list with the value in the text box.
 			<form id="search-form" data-bind="submit: updateList">
 				<input type="text" data-bind="value : filter"></input>
 				<input type="submit" text="Filter"></input>
 			</form>
-		</header>
-		<div id="cssmenu">
-			<!-- Uses the foreach binding to display each of the markers in the myFilteredLocations observable array -->
-			<ul data-bind="foreach: myFilteredLocations">
-				<li><a href="#"><span data-bind="text: title, click: clickActions"></span></a></li>
-			</ul>
+		</header> -->
+		<div class="row" id="mainContainer">
+		<div class="col-md-2">
+		<div class="nav-side-menu">
+			<div class="brand">Local Restaurants</div>
+			<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+			<div class="menu-list">
+				<!-- Uses the foreach binding to display each of the markers in the myFilteredLocations observable array -->
+				<ul id="menu-content" class="menu-content collapse out" data-bind="foreach: myFilteredLocations">
+					<li><span data-toggle="collapse" data-target="#menu-content" data-bind="text: title, click: clickActions" /></li>
+				</ul>
+			</div>
 		</div>
-		<!-- Creates the container for the map-->
+	</div>
+	<div class="col-md-10">
+		<!-- Creates the div container for the map-->
 		<div id="map"></div>
+	</div>
+	</div>
+
 	</body>
 	<!-- Loads the scripts for jQuery, the Google Maps API, Oauth processing, Knockout, and the main javascript -->
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHd_wkaJ3BsSb6J1R0iGBClGAhN7KdxB8&callback=initMap"></script>
 	<script src="js/jquery.min.js"></script>
+	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
 	<script type="text/javascript" src="http://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
 	<script src="js/knockout-3.3.0.js"></script>
 	<script src="js/main.js"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHd_wkaJ3BsSb6J1R0iGBClGAhN7KdxB8&callback=initMap"></script>
 </html>
