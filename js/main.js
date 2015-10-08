@@ -1,4 +1,4 @@
-//TODO: use keywords?
+//This javascript provides the engine for the Google Maps display, as well as the ViewModel for binding the list of locations to the HTML and the predetermined data
 
 //These variables need to be global
 var map;
@@ -14,127 +14,208 @@ var STARTINGLNG = -77.581635;
 /////////////
 
 //Creates a JSON object with the information provided for the restaurants to be included in the app. The lat/lng will be used to place markers and the address and zip will be used with the Yelp API
+//Keywords are also provided for improved searching
 var myLocations = {
 	locationInfo : [
 		{
 			'name' : 'Ginger 108',
 			'location' : { lat : 35.262314, lng : -77.581747 },
 			'address' : '108 W North St.',
-			'zip' : 28501
+			'zip' : 28501,
+			'keyword1' : 'chinese',
+			'keyword2' : 'fusion',
+			'keyword3' : 'gourmet',
+			'keyword4' : 'bar'
 		},
 		{
 			'name' : 'Chef and the Farmer',
 			'location' : { lat : 35.261328, lng : -77.58216299999998 },
 			'address' : '120 W Gordon St.',
-			'zip' : 28501
+			'zip' : 28501,
+			'keyword1' : 'american',
+			'keyword2' : 'southern',
+			'keyword3' : 'gourmet',
+			'keyword4' : 'bar'
 		},
 		{
 			'name' : 'Mother Earth Brewery',
 			'location' : { lat : 35.262897, lng : -77.582513 },
 			'address' : '311 N Herritage St',
-			'zip' : 28501
+			'zip' : 28501,
+			'keyword1' : 'beer',
+			'keyword2' : 'bar',
+			'keyword3' : 'brewery',
+			'keyword4' : 'snacks'
 		},
 		{
 			'name' : 'Boiler Room Oyster Bar',
 			'location' : { lat : 35.262314, lng : -77.581747 },
 			'address' : '108 W. North St.',
-			'zip' : 28501
+			'zip' : 28501,
+			'keyword1' : 'american',
+			'keyword2' : 'hamburgers',
+			'keyword3' : 'bar',
+			'keyword4' : 'oysters'
 		},
 		{
 			'name' : "Aggie's Steak Subs",
 			'location' : { lat: 35.270180, lng : -77.592441 },
 			'address' : '901 W. Vernon Ave.',
-			'zip' : 28501
+			'zip' : 28501,
+			'keyword1' : 'subs',
+			'keyword2' : 'sanwiches',
+			'keyword3' : 'american',
+			'keyword4' : 'burgers'
 		},
 		{
 			'name' : 'The Peach House',
 			'location' : { lat : 35.269265, lng : -77.587222 },
 			'address' : '412 W. Vernon Ave.',
-			'zip' : 28501
+			'zip' : 28501,
+			'keyword1' : 'sandwiches',
+			'keyword2' : 'soups',
+			'keyword3' : 'lunch',
+			'keyword4' : 'bakery'
 		},
 		{
 			'name' : "Christopher's",
 			'location' : { lat : 35.262570, lng : -77.580782 },
 			'address' : '217 N. Queen St.',
-			'zip' : 28501
+			'zip' : 28501,
+			'keyword1' : 'american',
+			'keyword2' : 'breakfast',
+			'keyword3' : 'diner',
+			'keyword4' : 'southern'
 		},
 		{
 			'name' : "King's BBQ",
 			'location' : { lat : 35.243379, lng : -77.579103 },
 			'address' : '405 E. New Bern Rd.',
-			'zip' : 28504
+			'zip' : 28504,
+			'keyword1' : 'southern',
+			'keyword2' : 'barbecue',
+			'keyword3' : 'grill',
+			'keyword4' : 'american'
 		},
 		{
 			'name' : "Lovick's Cafe",
 			'location' : { lat : 35.263059, lng : -77.583075 },
 			'address' : '320 N. Heritage St.',
-			'zip' : 28501
+			'zip' : 28501,
+			'keyword1' : 'american',
+			'keyword2' : 'diner',
+			'keyword3' : 'breakfast',
+			'keyword4' : 'burgers'
 		},
 		{
 			'name' : 'El Azteca',
 			'location' : { lat: 35.267563, lng : -77.625999 },
 			'address' : '2928 W. Vernon Ave.',
-			'zip' : 28504
+			'zip' : 28504,
+			'keyword1' : 'mexican',
+			'keyword2' : 'margaritas',
+			'keyword3' : 'beer',
+			'keyword4' : 'to go'
 		},
 		{
 			'name' : 'The Olympian',
 			'location' : { lat : 35.269720, lng : -77.588980 },
 			'address' : '601 W. Vernon Ave.',
-			'zip' : 28501
+			'zip' : 28501,
+			'keyword1' : 'greek',
+			'keyword2' : 'diner',
+			'keyword3' : 'pizza',
+			'keyword4' : 'sandwiches'
 		},
 		{
 			'name' : 'The Baron and the Beef',
 			'location' : { lat : 35.230617, lng : -77.547364 },
 			'address' : '1631 US-70',
-			'zip' : 28501
+			'zip' : 28501,
+			'keyword1' : 'steak',
+			'keyword2' : 'american',
+			'keyword3' : 'salad bar',
+			'keyword4' : 'southern'
 		},
 		{
 			'name' : 'Queen Street Deli & Bakery',
 			'location' : { lat : 35.259798, lng : -77.581544 },
 			'address' : '117 S. Queen Street',
-			'zip' : 28501
+			'zip' : 28501,
+			'keyword1' : 'sandwiches',
+			'keyword2' : 'soups',
+			'keyword3' : 'bakery',
+			'keyword4' : 'healthy'
 		},
 		{
 			'name' : 'Wok and Roll',
 			'location' : { lat : 35.287941, lng : -77.590751 },
 			'address' : '2424 N. Heritage St.',
-			'zip' : 28501
+			'zip' : 28501,
+			'keyword1' : 'chinese',
+			'keyword2' : 'fast food',
+			'keyword3' : 'to go',
+			'keyword4' : 'delivery'
 		},
 		{
 			'name' : "Hawk's Nest",
 			'location' : { lat : 35.260159, lng : -77.580978 },
 			'address' : '100 S. Queen St.',
-			'zip' : 28501
+			'zip' : 28501,
+			'keyword1' : 'diner',
+			'keyword2' : 'american',
+			'keyword3' : 'diner',
+			'keyword4' : 'cafe'
 		},
 		{
 			'name' : "Barney's Pizzeria & Grill",
 			'location' : { lat : 35.265175, lng : -77.637867 },
 			'address' : '3647 W. Vernon Ave.',
-			'zip' : 28504
+			'zip' : 28504,
+			'keyword1' : 'pizza',
+			'keyword2' : 'italian',
+			'keyword3' : 'sandwiches',
+			'keyword4' : 'snacks'
 		},
 		{
 			'name' : 'Pizza Villa',
 			'location' : { lat : 35.270506, lng : -77.600706 },
 			'address' : '1400 W. Vernon Ave.',
-			'zip' : 28501
+			'zip' : 28501,
+			'keyword1' : 'pizza',
+			'keyword2' : 'italian',
+			'keyword3' : 'sandwiches',
+			'keyword4' : 'salad bar'
 		},
 		{
 			'name' : 'El Nuevo San Juan',
 			'location' : { lat : 35.285947, lng : -77.586973 },
 			'address' : '2423 N. Herritage St.',
-			'zip' : 28501
+			'zip' : 28501,
+			'keyword1' : 'mexican',
+			'keyword2' : 'margaritas',
+			'keyword3' : 'beer',
+			'keyword4' : 'bar'
 		},
 		{
 			'name' : 'Tokyo House',
 			'location' : { lat : 35.270751, lng : -77.596925 },
 			'address' : '1201 W. vernon Ave.',
-			'zip' : 28501
+			'zip' : 28501,
+			'keyword1' : 'sushi',
+			'keyword2' : 'japanese',
+			'keyword3' : 'hibachi',
+			'keyword4' : 'beer'
 		},
 		{
 			'name' : "Lily's Pizza",
 			'location' : { lat : 35.285904, lng : -77.586926 },
 			'address' : '2423 N. Herritage St.',
-			'zip' : 28501
+			'zip' : 28501,
+			'keyword1' : 'pizza',
+			'keyword2' : 'subs',
+			'keyword3' : 'sandwiches',
+			'keyword4' : 'snacks'
 		}
 	]
 }
@@ -154,6 +235,7 @@ var myViewModel = {
 }
 
 //Filters List View and Markers based on the filter input
+//Filters on name, address, and four keywords
 myViewModel.filteredItems = ko.computed(function() {
 	var self = this;
 	var filter = self.filter().toLowerCase();
@@ -161,7 +243,8 @@ myViewModel.filteredItems = ko.computed(function() {
 		return self.myObservableLocations();
 	} else {
 		return ko.utils.arrayFilter(self.myObservableLocations(), function(item) {
-			return item.title.toLowerCase().indexOf(filter) !== -1;
+			return ((item.title.toLowerCase().indexOf(filter)) !== -1 || (item.address.toLowerCase().indexOf(filter) !== -1) || (item.keyword1.toLowerCase().indexOf(filter) !== -1) ||
+				    (item.keyword2.toLowerCase().indexOf(filter) !== -1) || (item.keyword3.toLowerCase().indexOf(filter) !== -1) || (item.keyword4.toLowerCase().indexOf(filter) !== -1));
 		});
 	}
 }, myViewModel);
@@ -170,12 +253,14 @@ myViewModel.filteredItems = ko.computed(function() {
 myViewModel.updateList = function() {
 	var self = this;
 	var filteredList = self.filteredItems();
-	self.myFilteredLocations.removeAll();
-	for (var i = 0; i < filteredList.length; i++) {
-		self.myFilteredLocations.push(filteredList[i]);
+	if (filteredList != self.myFilteredLocations()) {
+		self.myFilteredLocations.removeAll();
+		for (var i = 0; i < filteredList.length; i++) {
+			self.myFilteredLocations.push(filteredList[i]);
+		}
+		clearMarkers();
+		setMarkers(self.myFilteredLocations(), map);
 	}
-	clearMarkers();
-	setMarkers(self.myFilteredLocations(), map);
 }
 
 ////////////
@@ -188,6 +273,7 @@ myViewModel.updateList = function() {
 function initMap() {
 	// Create a map object and specify the DOM element for display.
 	var showControls = true;
+	// Don't show controls on smaller windows for increased responsiveness
 	if ($( window ).height() < 800) {
 		showControls = false;
 	}
@@ -209,18 +295,25 @@ function setMarkers(locations, map) {
 //Initializes markers and pushes them to the ViewModel
 function initMarkers(map) {
 	for (var i = 0; i < myLocations.locationInfo.length; i++) {
+		markerInfo = myLocations.locationInfo[i];
 		var marker = new google.maps.Marker({
-			position: myLocations.locationInfo[i].location,
+			position: markerInfo.location,
 			map: map,
 			animation: google.maps.Animation.DROP,
-			title: myLocations.locationInfo[i].name,
-			address: myLocations.locationInfo[i].address,
-			zip: myLocations.locationInfo[i].zip
+			title: markerInfo.name,
+			address: markerInfo.address,
+			zip: markerInfo.zip,
+			keyword1: markerInfo.keyword1,
+			keyword2: markerInfo.keyword2,
+			keyword3: markerInfo.keyword3,
+			keyword4: markerInfo.keyword4,
+			keywords: markerInfo.keyword5
 		});
 		myViewModel.currentMarker = marker;
 		marker.addListener('click', clickActions);
 		myViewModel.myObservableLocations.push(marker);
 		myViewModel.myFilteredLocations.push(marker);
+		//Push markers to bounds array to help with auto-centering
 		bounds.extend(marker.getPosition());
 	}
 	setMarkers(myViewModel.myObservableLocations(), map);
@@ -241,19 +334,16 @@ function clickActions() {
 
 //Sets a new info window and calls the function to get the Yelp data to fill it
 function setInfoWindow() {
+	var marker = myViewModel.currentMarker;
 	if (infowindow) {
 		infowindow.close();
 	}
-	var height = $( window ).height() / 4;
-	var width = $( window ).width() / 1.5;
 	infowindow = new google.maps.InfoWindow({
 		content: '<div id="info"><img src="images/loading.png"></div>',
-		maxHeight: height,
-		maxWidth: width
 	});
-	map.panTo(myViewModel.currentMarker.getPosition())
-	infowindow.open(map,myViewModel.currentMarker);
-	getYelpInfo(myViewModel.currentMarker.title, myViewModel.currentMarker.address, myViewModel.currentMarker.zip);
+	map.panTo(marker.getPosition())
+	infowindow.open(map,marker);
+	getYelpInfo(marker.title, marker.address, marker.zip);
 }
 
 //Utility function to clear markers

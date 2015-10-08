@@ -11,14 +11,6 @@
 
 	</head>
 	<body>
-		<!-- <header>
-			<!-- Creates the form for the filter. Binds the submit button to update the list with the value in the text box.
-			<form id="search-form" data-bind="submit: updateList">
-				<input type="text" data-bind="value : filter"></input>
-				<input type="submit" text="Filter"></input>
-			</form>
-		</header> -->
-</div>
 		<div class="row" id="mainContainer">
 		<div class="col-md-2">
 		<div class="nav-side-menu">
@@ -28,16 +20,16 @@
 				<!-- Uses the foreach binding to display each of the markers in the myFilteredLocations observable array -->
 				<li>
 					<form id="custom-search-input" data-bind="submit : updateList">
-                            <div class="input-group col-md-12">
-                                <input type="text" class="search-query form-control" data-bind="value : filter" placeholder="Search" />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-danger" type="sumbit" >
-                                        <span class=" glyphicon glyphicon-search"></span>
-                                    </button>
-                                </span>
-                            </div>
-                        </form>
-                    </li>
+						<div class="input-group col-md-12">
+							<input type="text" class="search-query form-control" data-bind="value : filter" placeholder="Search" />
+							<span class="input-group-btn">
+								<button class="btn btn-danger" type="sumbit" >
+									<span class=" glyphicon glyphicon-search"></span>
+								</button>
+							</span>
+						</div>
+					</form>
+				</li>
 				<ul id="menu-content" class="menu-content collapse out" data-bind="foreach: myFilteredLocations">
 					<li><span data-toggle="collapse" data-target="#menu-content" data-bind="text: title, click: clickActions" /></li>
 				</ul>
@@ -49,7 +41,6 @@
 		<div id="map"></div>
 	</div>
 	</div>
-
 	</body>
 	<!-- Loads the scripts for jQuery, the Google Maps API, Oauth processing, Knockout, and the main javascript -->
 	<script src="js/jquery.min.js"></script>
