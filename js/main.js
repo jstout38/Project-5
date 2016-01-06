@@ -277,6 +277,10 @@ function initMap() {
 	if ($( window ).height() < 800) {
 		showControls = false;
 	}
+	if ($( window ).width() < 767) {
+		$('#menu-content').attr('data-toggle', 'collapse');
+		$('#menu-content').attr('data-target', "#menu-content");
+	}
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: STARTINGLAT, lng: STARTINGLNG},
 		mapTypeControl: showControls
@@ -430,5 +434,7 @@ getYelpInfo = function(title, address, zip) {
 	});
 }
 
+
 //Bind the ViewModel
 ko.applyBindings(myViewModel);
+
