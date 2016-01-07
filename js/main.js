@@ -279,7 +279,7 @@ function initMap() {
 	}
 	if ($( window ).width() < 767) {
 		$('#menu-content').attr('data-toggle', 'collapse');
-		$('#menu-content').attr('data-target', "#menu-content");
+		$('#menu-content').attr('data-target', ".menu-list, #menu-content");
 	}
 	map = new google.maps.Map(document.getElementById('map'), {
 		center: {lat: STARTINGLAT, lng: STARTINGLNG},
