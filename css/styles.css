@@ -52,6 +52,12 @@
   display: none;
 }
 
+@media (max-width: 1000px) {
+  .menu-list {
+    display: none;
+  }
+}
+
 .nav-side-menu ul,
 .nav-side-menu li {
   list-style: none;
